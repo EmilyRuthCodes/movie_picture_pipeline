@@ -1,7 +1,7 @@
 # There should be a file called .github/workflows/frontend-ci.yaml in the root of the project.
 name: 'Frontend CI Pipeline'
 on:
-  workflow dispatch:
+  workflow_dispatch
   pull_request:
     branches:
       - main
