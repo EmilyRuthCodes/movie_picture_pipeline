@@ -76,7 +76,7 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build --build-arg REACT_APP_MOVIE_API_URL=${REACT_APP_MOVIE_API_URL} -t $ECR_REPOSITORY:$IMAGE_TAG starter/frontend
+          docker build --build-arg REACT_APP_MOVIE_API_URL=${REACT_APP_MOVIE_API_URL} -t $ECR_REPOSITORY:$IMAGE_TAG frontend
 
       - name: Push Docker image to ECR
         run: |
