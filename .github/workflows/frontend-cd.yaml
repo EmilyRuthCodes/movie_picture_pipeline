@@ -110,6 +110,17 @@ jobs:
           echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
 
+      - name: Debug kubeconfig
+        run: |
+          echo "Contents of kubeconfig:"
+          cat $HOME/.kube/config
+          echo "Current context:"
+          kubectl config current-context
+          echo "Cluster info:"
+          kubectl cluster-info
+        env:
+          KUBECONFIG: $HOME/.kube/config
+
       - name: Check cluster info
         env:
           KUBECONFIG: $HOME/.kube/config
