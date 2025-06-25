@@ -141,6 +141,11 @@ jobs:
           cat $HOME/.kube/config
           kubectl config view
 
+      - name: Debug kustomize build output
+        run: |
+          cd backend/k8s
+          kustomize build
+
       - name: Deploy to Kubernetes
         run: |
           cd backend/k8s
