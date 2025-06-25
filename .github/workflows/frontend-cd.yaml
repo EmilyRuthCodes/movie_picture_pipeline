@@ -73,10 +73,10 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          
+
       - name: Build Docker image
         run: |
-          docker build --build-arg REACT_APP_MOVIE_API_URL=${REACT_APP_MOVIE_API_URL} -t $ECR_REPOSITORY:$IMAGE_TAG ./starter/frontend
+          docker build --build-arg REACT_APP_MOVIE_API_URL=${REACT_APP_MOVIE_API_URL} -t $ECR_REPOSITORY:$IMAGE_TAG starter/frontend
 
       - name: Push Docker image to ECR
         run: |
