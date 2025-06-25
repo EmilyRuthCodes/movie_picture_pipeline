@@ -12,7 +12,7 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 jobs:
-  lint:
+  lint:aws eks list-clusters --region us-east-1
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
