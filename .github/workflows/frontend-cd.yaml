@@ -22,11 +22,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        working-directory: ./starter/frontend
+        working-directory: starter/frontend
         run: npm ci
 
       - name: Run linter
-        working-directory: ./starter/frontend
+        working-directory: starter/frontend
         run: npm run lint
 
   test:
@@ -42,11 +42,11 @@ jobs:
           node-version: 16
 
       - name: Install dependencies
-        working-directory: ./starter/frontend
+        working-directory: starter/frontend
         run: npm ci
 
       - name: Run Tests
-        working-directory: ./starter/frontend
+        working-directory: starter/frontend
         run: CI=true npm test
 
   build_and_push:
