@@ -97,6 +97,6 @@ jobs:
       
       - name: Build Docker Image
         run: |
-          docker build -t movie-picture ./frontend
+          docker build -t movie-picture-frontend ./frontend
 
 # The pipeline should be executed automatically on pull_request The pipeline should be able to be run manually The pipeline should be running without errors with all tests passing and no output failures from any of the steps

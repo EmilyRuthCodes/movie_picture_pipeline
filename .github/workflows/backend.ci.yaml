@@ -1,0 +1,76 @@
+# There should be a file called .github/workflows/backend-ci.yaml in the root of the project 
+name: 'Backend CI Pipeline'
+on:
+  workflow_dispatch:
+  pull_request:
+    branches:
+      - main
+
+# There should be a job in the workflow that runs linting.
+
+jobs:
+  lint:
+    name: Lint Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+     - name: Install dependencies
+        run: cd backend && npm ci
+
+      - name: Run Linter
+        run: cd backend && npm run lint
+
+
+# There should be a job in the workflow that runs the tests Linting and testing should be done in parallel.
+
+  test:
+    name: Test Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: cd backend && npm ci
+
+      - name: Run Tests
+        run: cd backend && npm run test
+
+# The job and lint should complete before proceeding to the build step There should be a job that builds the application using docker.
+
+  build:
+    name: Build Job
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: cd backend && npm ci
+
+      - name: Run Tests
+        run: cd backend && npm run test
+      
+      - name: Build Docker Image
+        run: |
+          docker build -t movie-picture-backend ./frontend
+
+# The pipeline should be executed automatically on pull_request The pipeline should also be able to be run manually The pipeline should be running without errors with all tests passing and no output failures from any of the steps
