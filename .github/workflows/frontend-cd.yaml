@@ -110,6 +110,11 @@ jobs:
           echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
 
+      - name: Check cluster info
+        env:
+          KUBECONFIG: $HOME/.kube/config
+        run: kubectl cluster-info
+
       - name: Set kustomize image tag
         run: |
           cd frontend/k8s
