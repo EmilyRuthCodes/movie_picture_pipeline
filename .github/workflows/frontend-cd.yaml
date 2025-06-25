@@ -104,6 +104,7 @@ jobs:
 
       - name: Configure kubeconfig
         run: |
+          mkdir -p $HOME/.kube
           echo "${KUBECONFIG}" | base64 --decode > $HOME/.kube/config
 
       - name: Set kustomize image tag
