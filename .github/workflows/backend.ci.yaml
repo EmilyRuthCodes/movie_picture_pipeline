@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: [16, 18]
+          node-version: 16
 
       - name: Install dependencies
         run: cd backend && npm ci
@@ -40,7 +40,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: [16, 18]
+          node-version: 16
 
       - name: Install dependencies
         run: cd backend && npm ci
@@ -61,8 +61,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: [16, 18]
-          
+          node-version: 16
+
       - name: Install dependencies
         run: cd backend && npm ci
 
@@ -71,6 +71,6 @@ jobs:
       
       - name: Build Docker Image
         run: |
-          docker build -t movie-picture-backend ./frontend
+          docker build -t movie-picture-backend ./backend
 
 # The pipeline should be executed automatically on pull_request The pipeline should also be able to be run manually The pipeline should be running without errors with all tests passing and no output failures from any of the steps
