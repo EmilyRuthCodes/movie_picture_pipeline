@@ -72,19 +72,21 @@ jobs:
 
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v1
-        with:
-          mask-password: false
-          registry-type: private
-          skip-logout: false
-
 
       - name: Build Docker image
         run: |
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG -f backend/Dockerfile backend
+        env:
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_BACKEND }}
+          IMAGE_TAG: ${{ github.sha }}
 
       - name: Push Docker image to ECR
         run: |
           docker push $ECR_REPOSITORY:$IMAGE_TAG
+        env:
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_BACKEND }}
+          IMAGE_TAG: ${{ github.sha }}
+
 
   deploy:
     runs-on: ubuntu-latest
