@@ -122,7 +122,17 @@ jobs:
           cd backend/k8s
           kustomize edit set image backend=${ECR_REPOSITORY}:${IMAGE_TAG}
 
+      - name: Configure kubeconfig
+        run: |
+          mkdir -p $HOME/.kube
+          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
+          chmod 600 $HOME/.kube/config
+
       - name: Deploy to Kubernetes
         run: |
           cd backend/k8s
           kustomize build | kubectl apply -f -
+        env:
+          KUBECONFIG: $HOME/.kube/config
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_BACKEND }}
+          IMAGE_TAG: ${{ github.sha }}
