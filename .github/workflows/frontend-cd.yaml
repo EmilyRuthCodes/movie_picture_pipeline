@@ -93,12 +93,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Setup kubectl and kustomize
+      - name: Setup kubectl
         run: |
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
           chmod +x kubectl
           sudo mv kubectl /usr/local/bin/
-          curl -sLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/latest/download/kustomize_linux_amd64
+
+      - name: Setup kustomize
+        run: |
+          curl -s "https://raw.githubusercontent.com/kubernetes-sigs/kustomize/master/hack/install_kustomize.sh" | bash
           chmod +x kustomize
           sudo mv kustomize /usr/local/bin/
 
