@@ -130,6 +130,12 @@ jobs:
           cd backend/k8s
           kustomize edit set image backend=${ECR_REPOSITORY}:${IMAGE_TAG}
 
+      - name: Debug kubeconfig
+        run: |
+          echo "KUBECONFIG is set to: $KUBECONFIG"
+          cat $HOME/.kube/config
+          kubectl config view
+
       - name: Deploy to Kubernetes
         run: |
           cd backend/k8s
