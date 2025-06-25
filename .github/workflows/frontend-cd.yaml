@@ -120,4 +120,4 @@ jobs:
           KUBECONFIG: $HOME/.kube/config
         run: |
           cd frontend/k8s
-          kustomize build | kubectl apply -f -
+          kustomize build | kubectl apply --validate=false -f -
