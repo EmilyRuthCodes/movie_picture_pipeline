@@ -151,12 +151,16 @@ jobs:
         run: |
           cd backend/k8s
           kustomize build > out.yaml
+          echo "--- kustomize build output ---"
           cat out.yaml
+          echo "--- kubectl get nodes ---"
           kubectl get nodes
+          echo "--- kubectl apply ---"
           kubectl apply -f out.yaml
         env:
           KUBECONFIG: $HOME/.kube/config
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY_BACKEND }}
           IMAGE_TAG: ${{ github.sha }}
+
 
 
