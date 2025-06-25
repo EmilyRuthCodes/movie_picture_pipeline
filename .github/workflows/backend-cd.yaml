@@ -140,6 +140,7 @@ jobs:
           echo "KUBECONFIG is set to: $KUBECONFIG"
           cat $HOME/.kube/config
           kubectl config view
+          kubectl get nodes
 
       - name: Debug kustomize build output
         run: |
