@@ -9,11 +9,6 @@ export default defineConfig([
     files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     plugins: { js },
     extends: ["js/recommended"],
-    env: {
-      browser: true,
-      node: true,
-      jest: true, 
-    },
     languageOptions: {
       globals: {
         ...globals.browser,
