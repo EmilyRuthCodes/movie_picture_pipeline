@@ -1,5 +1,5 @@
 # There should be a file called .github/workflows/frontend-ci.yaml in the root of the project.
-name: 'Frontend CI Pipeline'
+name: 'Frontend Continuous Integration'
 on:
   workflow_dispatch:
   pull_request:

@@ -104,11 +104,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Check AWS CLI and identity
-        run: |
-          aws --version
-          aws sts get-caller-identity
-
       - name: Setup kubectl
         run: |
           curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
@@ -134,18 +129,6 @@ jobs:
         run: |
           cd backend/k8s
           kustomize edit set image backend=${ECR_REPOSITORY}:${IMAGE_TAG}
-
-      - name: Debug kubeconfig
-        run: |
-          echo "KUBECONFIG is set to: $KUBECONFIG"
-          cat $HOME/.kube/config
-          kubectl config view
-          kubectl get nodes
-
-      - name: Debug kustomize build output
-        run: |
-          cd backend/k8s
-          kustomize build
 
       - name: Deploy to Kubernetes
         run: |
