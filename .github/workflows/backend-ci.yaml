@@ -1,5 +1,5 @@
 # There should be a file called .github/workflows/backend-ci.yaml in the root of the project 
-name: 'Backend CI Pipeline'
+name: 'Backend Continuous Integration'
 on:
   workflow_dispatch:
   pull_request:
