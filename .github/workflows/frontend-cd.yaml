@@ -126,3 +126,7 @@ jobs:
         run: |
           cd frontend/k8s
           kustomize build | kubectl apply --validate=false -f -
+      
+      - name: Print Application URLs
+        run: |
+          kubectl get svc -A
