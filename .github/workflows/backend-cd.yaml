@@ -122,10 +122,15 @@ jobs:
           echo "${{ secrets.KUBECONFIG }}" | base64 --decode > $HOME/.kube/config
           chmod 600 $HOME/.kube/config
 
+      - name: Debug KUBECONFIG Secret (REMOVE AFTER TESTING)
+        run: |
+          echo "${{ secrets.KUBECONFIG }}"
+
       - name: Test kubectl access
         run: kubectl get nodes
 
       - name: Set kustomize image tag
+      
         run: |
           cd backend/k8s
           kustomize edit set image backend=${ECR_REPOSITORY}:${IMAGE_TAG}
